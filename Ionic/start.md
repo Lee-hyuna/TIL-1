@@ -4,6 +4,28 @@
 
 기본 셋팅과, 명령어를 알아본다.
 
+## Node 설치
+
+https://nodejs.org
+
+설치 후 커맨드 창을 열어
+
+> $ node
+>
+> \> console.log('hello node');
+>
+> hello node
+>
+> undefined
+
+와 같이 나온다면 성공.
+
+## Cordova 설치
+
+코도바는 하이브리드 앱에서 네이티브 앱의 기능을 사용할 수 있게 하는 라이브러리다.
+
+> npm install -g cordova
+
 
 
 ## CLI 설치하기

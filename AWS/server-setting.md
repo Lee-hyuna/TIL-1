@@ -28,8 +28,7 @@ puttyGen 이용 private Key 생성
 >
 > sudo yum install java-1.8.0
 
-
-
+####  
 
 #### **톰캣, 아파치, mysql 설치**
 
@@ -55,8 +54,6 @@ puttyGen 이용 private Key 생성
 > sudo find / -name '*.pl' (전체 디렉)
 >
 > sudo find / -name 'et*' -type d (전체 디렉 폴더 찾기)
-
-
 
 
 #### **톰캣 설정**
@@ -97,3 +94,21 @@ puttyGen 이용 private Key 생성
 war 파일이름을 ROOT.war로 지으면,
 
 context path가 /로 자동 설정된다.
+
+
+
+#### 시간 셋팅
+
+> sudo vim /etc/sysconfig/clock
+
+-**clock** 파일 내용을 아래와 같이 수정
+
+​	ZONE="*Asia/Seoul*"
+
+​	UTC=true
+
+인스턴스가 현지 시간 정보를 참조할 때 표준 시간대 파일을 찾을 수 있도록 `/etc/localtime`과 표준 시간대 파일 사이에 심볼 링크를 생성
+
+> **sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime**
+>
+> sudo reboot

@@ -1,4 +1,4 @@
-## 아이오닉 MVC 패턴으로 json 호출
+## 아이오닉 MVC 패턴으로 http request
 
 Angular 2, Ionic 2 기준 MVC 생성
 

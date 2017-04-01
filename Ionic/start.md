@@ -44,13 +44,13 @@ node와 npm이 설치 되어 있어야 한다.
 
   
 
-## 사용하기
+## 명령어
 
 - 새 프로젝트 만들기
 
 > $ ionic start --v2 myApp blank
 
-blank 대신 다른 템플릿을 입력할 수도 있다. (blank/sidemenu/tabs)
+blank 대신 다른 템플릿을 입력할 수도 있다. (blank/sidemenu/tabs/tutorial,github-url)
 
 - 정보 보기
 
@@ -60,13 +60,17 @@ blank 대신 다른 템플릿을 입력할 수도 있다. (blank/sidemenu/tabs)
 
 > $ ionic serve
 
+- 플랫폼별 브라우저 확인
+
+> $ ionic serve --lab
+
 - 업로드
 
 > $ ionic upload
 
 
 
-- 사용가능 명령어
+- 사용가능 명령어 확인
 
 > $ ionic .
 
@@ -76,3 +80,4 @@ blank 대신 다른 템플릿을 입력할 수도 있다. (blank/sidemenu/tabs)
 
 [Ionic docs](http://ionicframework.com/docs/cli/)
 
+[스키머님 블로그](https://medium.com/witinweb/ionic-2-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-ed011c7fe69b)

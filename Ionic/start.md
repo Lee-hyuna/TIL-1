@@ -48,7 +48,7 @@ node와 npm이 설치 되어 있어야 한다.
 
 - 새 프로젝트 만들기
 
-> $ ionic start myApp blank
+> $ ionic start --v2 myApp blank
 
 blank 대신 다른 템플릿을 입력할 수도 있다. (blank/sidemenu/tabs)
 

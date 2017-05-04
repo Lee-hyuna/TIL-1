@@ -16,7 +16,7 @@
 
 ## App Id
 
-> $ ionic to init
+> $ ionic io init
 
 위 명령어를 치면 **ionic.config.json**에 APP_ID 가 셋팅된다.
 

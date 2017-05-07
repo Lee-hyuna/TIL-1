@@ -1,4 +1,4 @@
-## Angular 2.0 구조
+# Angular 2.0 구조
 
 Jquery를 써서 웹페이지를 작성해도
 
@@ -34,7 +34,7 @@ Angular2에서 바뀐 부분을 소개 한다.
 
 
 
-#### Angular2에서 바뀐 것들
+## Angular2에서 바뀐 것들
 
 - **컴포넌트 기반 개발**
 
@@ -89,7 +89,7 @@ HTML 템플릿과 CSS파일을 컴파일해 코드로 삽입하는 방식.
 
 
 
-### Angular2의 구조
+## Angular2의 구조
 
 Angular 하나의 어플리케이션은 컴포넌트들의 조합으로 이루어진다.
 
@@ -155,7 +155,7 @@ TypeScript형태로 작성.
 
 
 
-#### 컴포넌트(Component) 생성
+## 컴포넌트(Component) 생성
 
 ````typescript
 import { Component } from '@angular/core';
@@ -188,7 +188,7 @@ selector 속성에 컴포넌트를 등록하면 html파일이나, 다른 컴포�
 
 
 
-#### 모듈
+## 모듈
 
 - **정의**
 
@@ -227,7 +227,7 @@ import { MyComponent } from './my.component';
 
 
 
-#### 서비스
+## 서비스
 
 컴포넌트에 제공할 목적으로 외부에 정의한 클래스.
 
@@ -240,7 +240,7 @@ export class HelloService {}
 
 
 
-#### 지시자
+## 지시자
 
 - **정의**
 
@@ -267,7 +267,7 @@ export class HelloStyleDirective {
 
 
 
-#### 지원
+## 지원
 
 - IE9 이상
 - 엣지 13 이상

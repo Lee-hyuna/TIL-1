@@ -1,296 +1,240 @@
-# Angular 2.0 구조
-
-Jquery를 써서 웹페이지를 작성해도
-
-크게 문제될 것이 없었다.
-
-
-
-그러나, 비동기 페이지를 작성하다보면
-
-하드코딩이 필요한 불편한 점이 있었다.
-
-그렇게 접한 Angular는 답답했던 속을 뻥 뚫어주었다.
-
-비동기 페이지를 작성하는데 뛰어난 생산성을 가져다주었기 때문이다.
-
-
-
-충분히 만족하며 쓰고 있었지만....
-
-2015년 4월 Angular2가 발표되었고.
-
-단순한 확장이 아니라, 아예 새로운 프레임워크 였기에.
-
-Angular2가 발표된 직후, 개발자들이 "죽음", "재앙"과 같은 표현을 썼다고
-
-(나만 그렇게 생각했던게 아니었구나..)
-
-
-
-그런데, 생각보다 큰 장점이 많다고 한다.
-
-Angular2에서 바뀐 부분을 소개 한다.
-
-
-
-## Angular2에서 바뀐 것들
-
-- **컴포넌트 기반 개발**
-
-Controller 메서드가 아닌 컴포넌트 중심으로 프로그래밍
-
-- **영역 구분**
-
-$scope를 사용하지 않아도, 컴포넌트에 의해 영역이 명확히 구분
-
-- **Dom제어 모듈**
-
-angular.module 없이도 향상된 모듈 시스템 제공
-
-jQlite의 기능을 대체하는 Dom 제어 모듈 제공
-
-- **API 단순화**
-
-AngularJS의 지시자 43개를 폐기함으로서 API가 단순해짐
-
-- **성능향상**
-
-Angular1은 digest 루프로 인한 성능 저하가 있었음.
-
-Angular2에서는 이 문제가 발생하지 않음.
-
-그 외에도 성능 저하요인들이 사라지고 나서
-
-로딩시간은 2.5배, 바인딩을 통한 렌더링 성능은 4.2배 빨라짐
-
-- **TypeScript 사용**
-
-
- 자바스크립트의 상위집합 언어.
-
-따라서 자바스크립트 문법을 그대로 이용할 수 있음.
-
-최신 ECMA 스크립트 표준인 EC6, EC7의 특징까지도 지원
-
-- **컴파일 방식 변경**
-
-AOT(Ahead of time compilation)과 같은 사전 컴파일 방식 도입.
-
-HTML 템플릿과 CSS파일을 컴파일해 코드로 삽입하는 방식.
-
-> ex) ngIf나 ngFor와 같은 지시자를 브라우저에서 직접 실행할 일 없으니,
->
-> 컴파일 과정에 미리 수행해 코드에 적재해 놓고, 컴파일 없이 곧바로 실행되게 함.
-
-컴파일 과정이 없으므로 화면 표시 속도가 빠름.
-
-코드 용량도 50%이상까지 최적화.(JIT 컴파일러를 적재하지 않아도 되기 때문)
-
-
-
-## Angular2의 구조
-
-Angular 하나의 어플리케이션은 컴포넌트들의 조합으로 이루어진다.
-
-**Component는 Template + Class**로 이루어진다.
-
-컴포넌트들 끼리는 Routing이 가능하며.
-
-모듈과 서비스를 두어 중복 코드를 최소화 시킨다.
-
-
-
-- **Template**
-
-템플릿은 **컴포넌트의 UI**를 나타냄.
-
-Html로 작성.
-
-컴포넌트마다 가상 DOM을 이용하므로 컴포넌트간 스타일에 영향을 받지 않음.
-
-
-
-템플릿은
-
-바인딩(Binding), 지시자(Directive)를 포함한다.
-
-템플릿은 바인딩을 통해 클래스와 이어지는데..
-
-
-
-- **Class**
-
-바인딩을 통해 템플릿과 연결됌.
-
-> 이를 통해 템플릿에서 클래스로 이벤트를 전달하거나, 데이터를 교환할 수 있음.
-
-Properties와 Method를 포함
-
-TypeScript형태로 작성.
-
-
-
-- **Routing**
-
-컴포넌트는 자식 컴포넌트를 포함시킬 수 있음
-
-다른 컴포넌트로 URL을 라우팅할 수 있음(URL이 변경)
-
-
-
-- **Module**
-
-컴포넌트는 외부의 도움을 받아 기능을 더하거나 중복을 최소화.
-
-이 방법으로 "모듈"을 이용.
-
-
-
-- **Service**
-
-컴포넌트 내부 중복로직을 최소화하기 위해 외부에 서비스를 둠.
-
-서비스를 컴포넌트에 사용할 때 의존성 주입을 이용.
-
-
-
-## 컴포넌트(Component) 생성
-
-````typescript
-import { Component } from '@angular/core';
-@Component({
-  selector: 'hello-world', 
-  template: '<div>{{msg}}</div>', 
-  styles: ['div { background: blue; }'] })
-export class HelloWorld {
-  msg: string = "hello";
+# Angular 2 프로젝트의 구성
+
+앵귤러2의 프로젝트는 어떻게 구성되어 있는지 정리해보자
+
+- ./app
+- ./index.html
+- ./node_modules
+- ./package.json
+- ./styles.css
+- ./systemjs.config.js
+- ./tsconfig.json
+- ./typings.json
+
+
+
+## package.json
+
+npm 명령을 통해 외부 모듈에 대한 "의존성 관리"를 해준다. 
+
+````json
+{
+  "name": "angular-quickstart",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "lite": "lite-server",
+    "postinstall": "typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "@angular/common": "~2.0.2",
+    "@angular/compiler": "~2.0.2",
+    "@angular/core": "~2.0.2",
+    "@angular/forms": "~2.0.2",
+    "@angular/http": "~2.0.2",
+    "@angular/platform-browser": "~2.0.2",
+    "@angular/platform-browser-dynamic": "~2.0.2",
+    "@angular/router": "~3.0.2",
+    "@angular/upgrade": "~2.0.2",
+    "angular-in-memory-web-api": "~0.1.5",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.39",
+    "zone.js": "^0.6.25"
+  },
+  "devDependencies": {
+    "concurrently": "^3.0.0",
+    "lite-server": "^2.2.2",
+    "typescript": "^2.0.3",
+    "typings":"^1.4.0"
+  }
 }
 ````
 
-- **정의**
+기본 설정 값으로 package.json파일을 만드려면
 
-@Component 장식자를 이용해 정의.
+> $ npm init --yes
 
-- **지시자**
+설정한 pacakge.json 파일대로 패키지 설치하려면
 
-selector 속성에 컴포넌트를 등록하면 html파일이나, 다른 컴포넌트에
+> $ npm install
 
-> <hellow-world>
+개발 서버 실행
 
-형식으로 사용할 수 있다.
+> $ npm start
 
-- **바인딩**
+- 자주 사용하는 npm 명령어
 
-클래스에 선언된 msg 변수가 템플릿 표현식 {{msg}}에 바인딩돼 있으므로
+| 명령어                          | 의미                       |
+| ---------------------------- | ------------------------ |
+| npm install --global 패키지명    | 패키지를 로컬 전역에 설치함          |
+| npm install --global 패키지명@버전 | 패키지의 특정 버전을 로컬 전역에 설치함   |
+| npm install -g 패키지명@latest   | 패키지의 최신 버전을 로컬에 설치함      |
+| npm uninstall -g 패키지명        | 로컬에 설치된 패키지를 삭제          |
+| npm view 패키지명 versions       | 원격 저장소에 등록된 모든 패키지 버전 확인 |
+| npm view 패지지명 version        | 원격저장소에 등록된 최신 패키지 버전만 확인 |
 
-실행시 {{msg}}위치에 hello가 들어감.
+## index.html
 
+프로젝트의 시작 페이지.
 
+````html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Angular 2 Application</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 첫번째. 전역 스타일 호출 -->
+    <link rel="stylesheet" href="styles.css">
 
-## 모듈
+    <!-- 두번째. 폴리필 라이브러리 호출 -->
+    <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
+    <script src="https://unpkg.com/zone.js@0.6.25?main=browser"></script>
+    <script src="https://unpkg.com/reflect-metadata@0.1.3"></script>
 
-- **정의**
-
-````typescript
-export class Hello {}
+    <!-- 세번째. SystemJS 라이브러리 호출과 설정 -->	
+	<script src="https://unpkg.com/systemjs@0.19.27/dist/system.src.js"></script>
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+  </head>  
+  <body>
+	<!-- 네번째. application 표시 -->
+    <my-app>Loading...</my-app>
+  </body>
+</html>
 ````
 
-export 키워드를 이용해 모듈을 정의하고, 모듈을 외부로 노출할 것임을 알림.
+- **styles.css**
 
-- **사용**
+  앱 전역 스타일링
 
-````typescript
-import { Hello } from './hello';
-````
+- **폴리필 라이브러리 임포트**
 
-- 모듈 등록
+  > 폴리필? 구버전의 브라우저가 최신 스크립트 기능에 대응하도록 보완하는 라이브러리
 
-Angular의 모듈을 체계적으로 관리하기 위해 모듈시스템을 제공.(**app.module.ts**)
+  - core-js : ES6 지원을 위한 폴리필
+  - zonde.js : 변화 감지를 위한 라이브러리
+  - reflect-metadata : ES7 장식자 추가를 위한 폴리필
 
-@NgModule 장식자를 이용해 일반적인 모듈 구성.
+- **SystemJS 라이브러리**
 
-````typescript
-import { MyComponent } from './my.component';
-@NgModule({
-  imports: ]
-  	Angular 모듈, routing 모듈, ...
-  ],
-  declarations : [
-    컴포넌트, 지시자, 파이프,
-  ],
-  providers: [서비스 모듈, ...]
-  ,
-  ...
-})
-````
+  동적 모듈 로더, systemjs.config.js 파일을 통해 모듈 구성
 
+  ````javascript
+  (function (global) {
+    System.config({
+      paths: {
+        // 경로에 대한 별칭 설정
+        'npm:': 'node_modules/'
+      },
+      map: {
+        app: 'app',
+        '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+        '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+        '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+        '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+        '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+        '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
+        '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+        '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+        // 다른 라이브러리
+        'rxjs':                      'npm:rxjs',
+        'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+      },
+      // 파일이름이 없거나 확장자가 없을때의 처리방법에 대한 설정
+      packages: {
+        app: {
+          main: './main.js',
+          defaultExtension: 'js'
+        },
+        rxjs: {
+          defaultExtension: 'js'
+        },
+        'angular-in-memory-web-api': {
+          main: './index.js',
+          defaultExtension: 'js'
+        }
+      }
+    });
+  })(this);
+  ````
 
+  - paths 필드 : 경로에 대한 별칭
+  - map 필드 : 모듈 호출 정의
+     - app 필드 : 어플리케이션 디렉터리 위치 설정
+     - node_module의 별칭 (npm:@angular/..)으로 Angular 모듈 임포트
+     - Angular모듈은 @을 기재해서 외부 라이브러리와 구분
+  - packages : 확장자 처리
 
-## 서비스
+- <my-app>
 
-컴포넌트에 제공할 목적으로 외부에 정의한 클래스.
+  Angular 앱이 실행되는 위치이다. my-app은 어플리케이션 최상위 컴포넌트이다.
 
-서비스 정의는 @Injectable 장식자를 사용.
+  - app.component.ts
 
-````typescript
-import { Injectable } from '@angular/core';
-export class HelloService {}
-````
+  ````javascript
+  import { Component } from '@angular/core';
 
+  @Component({
+    selector: 'my-app',
+    template: '<h1>Hello Angular 2 Application</h1>'
+  })
+  export class AppComponent { }
+  ````
 
+  selector의 이름이 <my-app>에 대응하는 것을 확인할 수 있다.
 
-## 지시자
+  - app.module.ts
 
-- **정의**
+  ````typescript
+  import { NgModule }      from '@angular/core';
+  import { BrowserModule } from '@angular/platform-browser';
 
-@Directive 장식자 이용
+  import { AppComponent }   from './app.component';
 
-````typescript
-import { Directive, ElementRef, Render } from '@angular/core';
-@Directive({
-  selector: '[helloStyle]'
-})
-export class HelloStyleDirective {
-  constructor(private el: ElementRef, private renderer: Renderer){}
-}
-````
+  @NgModule({
+    imports:      [ BrowserModule ],
+    declarations: [ AppComponent ],
+    bootstrap:    [ AppComponent ]
+  })
 
-- **사용**
+  export class AppModule { }
+  ````
 
-````javascript
-@Component({
-  selector: 'my-component',
-  template: '<div helloStyle></div>'
-})
-````
+  애플리케이션 차원의 모듈파일. 전역으로 사용되는 모듈이나 최상위 컴포넌트를 등록. bootstrap 속성에는 애플리케이션을 실행할 때 가장 먼저 호출하게 할 컴포넌트를 등록
 
+  - main.ts
 
+   ````typescript
+  import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-## 지원
+  import { AppModule } from './app.module';
 
-- IE9 이상
-- 엣지 13 이상
-- 최신버전 크롬/파이어폭스
-- IE 모바일 11이상
-- IOS7 이상, 안드로이드 4.1 이상
+  const platform = platformBrowserDynamic();
+  platform.bootstrapModule(AppModule);
+   ````
 
+  app.modules.ts 파일을 임포트 해서 platform-browser-dynamic을 등록.
 
+  > platform-browser-dynamic은 Angular의 모든 API에 대한 진입점.
 
+  platform의 bootstrapModule() 메서드에 방금 정의한 AppModule을 지정.
 
 ## Reference
 
-쉽고 빠르게 배우는 Angular2 프로그래밍(장진욱 지음)
-
-[비주얼라이즈 ](http://visualize.tistory.com/442)
-
-[React보다 Angular2에 더 주목해야하는 이유 | 손찬욱 Blog](http://sculove.github.io/blog/2016/07/11/react%EB%B3%B4%EB%8B%A4-angular2%EC%97%90-%EB%8D%94-%EC%A3%BC%EB%AA%A9%ED%95%B4%EC%95%BC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/)
-
-[http://sticky32.tistory.com/entry/Angular2-컴포넌트에-대해서](http://sticky32.tistory.com/entry/Angular2-컴포넌트에-대해서)
-
-
-
-
-
-
+쉽고 빠르게 배우는 Angular 2 프로그래밍 - 정진욱
 

@@ -1,4 +1,4 @@
-## 아이오닉 Push 수신
+# 아이오닉 Push
 
 서버에서 아이오닉 앱으로 Push 메세지 수신기능 구현.
 
@@ -21,6 +21,18 @@
 위 명령어를 치면 **ionic.config.json**에 APP_ID 가 셋팅된다.
 
 이 APP_ID를 기억할것.
+
+
+
+## 안드로이드 Push ID 발급
+
+구글 Firebase로 이동해 Fcm Server Key/Sender Id를 발급받는다.
+
+프로젝트 생성 후, Settings->Cloud Messageing Tab에서 확인할 수 있다.
+
+[발급 방법](http://docs.ionic.io/services/profiles/#android-fcm-project--server-key)
+
+[Firebase 링크](https://console.firebase.google.com/)
 
 
 
@@ -65,18 +77,6 @@ const cloudSettings: CloudSettings = {
 })
 export class AppModule {}
 ```
-
-
-
-## 안드로이드 FCM ID 발급
-
-구글 Firebase로 이동해 Fcm ID를 발급받는다.
-
-프로젝트 생성 후.
-
-Settings->Cloud Messageing Tab에서 확인할 수 있다.
-
-[Firebase](https://console.firebase.google.com/)
 
 
 
@@ -134,9 +134,7 @@ export class SchedulePage implements OnInit {
 
 에뮬레이터나 실제 디바이스에서 테스트 해야한다.
 
-
-
-푸시 Register 부분은 로그인 이후에 넣는 것이 권장된다.
+>  푸시 Register 부분은 로그인 이후에 넣는 것이 권장된다.
 
 
 
@@ -144,21 +142,12 @@ export class SchedulePage implements OnInit {
 
 [대시보드](https://apps.ionic.io/apps/)
 
-대시보드에서 앱설정으로 들어간 뒤
+대시보드에서 앱설정으로 들어간 뒤 Settings -> Certificates 에서 프로필을 생성한다.
 
-Settings -> Certificates 에서 프로필을 생성한다.
+다음 생성된 프로필에 'Edit'에 들어간뒤 키를 넣어야 하는데.
 
-
-
-다음 생성된 프로필에 'Edit'에 들어간뒤
-
-키를 넣어야 하는데.
-
-
-
-MY-RELEASE-KEY : 키 파일 이름
-
-MY_ALIAS_NAME : 식별 이름 
+- MY-RELEASE-KEY : 키 파일 이름
+- MY_ALIAS_NAME : 식별 이름 
 
 위 내용을 본인에 맞게 수정 후 커맨드를 입력한다.
 
@@ -168,28 +157,65 @@ MY_ALIAS_NAME : 식별 이름
 
 
 
-키 생성을 위한 정보를 입력하고 비밀번호를 입력하면.
+- 키 생성을 위한 정보를 입력하고 비밀번호를 입력하면. 프로젝트 root 폴더에 키가 생성된다.
+- 해당 키파일과 비밀번호를 위의 Ceftificates -> Profile -> Edit에 등록한다.
 
-프로젝트 root 폴더에 키가 생성된다.
-
-
-
-해당 키파일과 비밀번호를 위의 Ceftificates -> Profile -> Edit
-
-에 등록한다.
-
-
-
-등록 후 DashBoard -> 프로젝트 선택 -> Push 탭에서
-
-푸시메세지를 발송해볼 수 있다.
-
-
+> 등록 후 DashBoard -> 프로젝트 선택 -> Push 탭에서 푸시메세지를 발송해볼 수 있다.
 
 **에뮬레이터나, 실제 디바이스에서 테스트 해볼것
+
+## 푸시 발송
+
+- 리눅스에서 아래와 같이 curl을 이용하여 푸시를 테스트 해볼 수 있다.
+
+````shell
+curl -X POST \
+  https://api.ionic.io/push/notifications \
+  -H 'authorization: Bearer [아이오닉 API토큰값]' \
+  -H 'content-type: application/json' \
+  -d '{
+    "tokens": ["[디바이스토큰]"],
+    "profile": "[위에서 생성한 security profile]",
+    "notification": {
+        "message": "Hello World! 안녕 친구들"
+    }
+}'
+````
+
+- Java 버젼 코드
+
+````java
+HttpClient httpClient = HttpClientBuilder.create().build();
+HttpPost request = new HttpPost(API_PUSH_URL);
+// 헤더 설정
+request.addHeader("content-type", "application/json");
+request.addHeader("Authorization", "Bearer " + apiProp.getProperty("api.ionic.key"));
+
+// 푸시 메세지 내용
+JSONObject messageObject = new JSONObject();
+messageObject.put("message", URLEncoder.encode(title, "UTF-8").replaceAll("[+]", " "));
+
+// 푸시 대상
+JSONArray jsonArray = new JSONArray();
+for (DataMap result : this.userService.selectList(new UserVo())) {
+  jsonArray.add(result.get("deviceToken"));
+}
+
+// 파라미터
+JSONObject paramters = new JSONObject();
+paramters.put("tokens", jsonArray.toString());
+paramters.put("profile", apiProp.getProperty("api.ionic.profile"));
+paramters.put("notification", messageObject.toString());
+
+request.setEntity(new StringEntity(paramters.toString()));
+HttpResponse response = httpClient.execute(request);
+this.log.debug(new BasicResponseHandler().handleResponse(response));
+````
 
 
 
 ## Reference
 
 [Ionic Doc Push](http://docs.ionic.io/services/push/)
+
+http://docs.ionic.io/api/endpoints/push.html#post-notifications

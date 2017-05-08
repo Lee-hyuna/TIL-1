@@ -85,6 +85,14 @@ npm 명령을 통해 외부 모듈에 대한 "의존성 관리"를 해준다.
 | npm view 패키지명 versions       | 원격 저장소에 등록된 모든 패키지 버전 확인 |
 | npm view 패지지명 version        | 원격저장소에 등록된 최신 패키지 버전만 확인 |
 
+## typings.json
+
+타입스크립트가 외부라이브러리(node, jasmine, core-js)를 인식할 수 있게 한다.
+
+## tsconfig.json
+
+타입스크립트를 자바스크립트로 변환할 때 필요한 설정 정보.
+
 ## index.html
 
 프로젝트의 시작 페이지.
@@ -233,6 +241,8 @@ npm 명령을 통해 외부 모듈에 대한 "의존성 관리"를 해준다.
   > platform-browser-dynamic은 Angular의 모든 API에 대한 진입점.
 
   platform의 bootstrapModule() 메서드에 방금 정의한 AppModule을 지정.
+
+
 
 ## Reference
 

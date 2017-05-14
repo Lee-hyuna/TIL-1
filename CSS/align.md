@@ -13,7 +13,6 @@
 
     `vertical-align:middle; display:table-cell;`
 
-> vertical-align
 
 # inline 요소의 정렬
 

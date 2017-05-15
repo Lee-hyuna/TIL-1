@@ -1,8 +1,8 @@
 # CSS display, visibility 속성
 
-inline 속성 : <b>, <span>, <img>, <a> 등 줄 바꿈이 되지 않음, 주로 줄속에 넣는 요소
+inline 속성 : `<b>`, `<span>`, `<img>`, `<a>` 등 줄 바꿈이 되지 않음, 주로 줄속에 넣는 요소
 
-block 속성 : <table>, <p>, <div>, <form> 등 줄 바꿈이 됌. 가로 화면 100%를 차지.
+block 속성 : `<table>`, `<p>`, `<div>`, `<form>` 등 줄 바꿈이 됌. 가로 화면 100%를 차지.
 
 ## display
 

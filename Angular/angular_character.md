@@ -22,7 +22,9 @@
 
 1. (click) 이벤트로 쓰이는듯.
 
-2. `@Output() outputProperty = new EventEmitter<boolean>();`
+2. (mouseover) 이벤트
+
+3. `@Output() outputProperty = new EventEmitter<boolean>();`
 
    `<child (outputProperty)="outputEvent($event)"></child>`
 

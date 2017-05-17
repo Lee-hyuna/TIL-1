@@ -213,7 +213,7 @@ Angular의 모듈을 체계적으로 관리하기 위해 모듈시스템을 제�
 ````typescript
 import { MyComponent } from './my.component';
 @NgModule({
-  imports: ]
+  imports: [
   	Angular 모듈, routing 모듈, ...
   ],
   declarations : [

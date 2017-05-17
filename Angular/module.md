@@ -56,7 +56,7 @@ Angular 모듈은 모듈성을 극대화시키기 위해서 **모듈을 그룹�
 
 **루트모듈/핵심모듈/특징모듈/공유모듈**로 나누어 관리.
 
-####루트모듈
+### 루트모듈
 
 최상위 모듈로서, 컴포넌트, 지시자, 서비스, 파이프와 같은 모듈을 등록하고 관리
 
@@ -82,7 +82,7 @@ import { MyComponent } from './my.component';
 })
 ````
 
-######imports 속성
+> imports 속성
 
 - **브라우저 모듈(Browser Module)**
 
@@ -126,21 +126,21 @@ export class AppRoutingModule {}
 
 forRoot를 이용해 라우트를 등록, `app.module.ts` 파일 `imports`에 추가
 
-###### providers 속성
+> providers 속성
 
 전역에서 사용할 서비스 등록
 
 > ex) 개발단계에서 전역적으로 사용되는 로거 서비스
 
-###### declarations 속성
+> declarations 속성
 
 어플리케이션 레벨에서 사용하고자 하는 컴포넌트, 지시자 파이프
 
-###### bootstrap 속성
+> bootstrap 속성
 
 최상위 컴포넌트인 애플리케이션 컴포넌트 등록
 
-####핵심 모듈
+### 핵심 모듈
 
   항상 동작할 필요가 있거나, 어플리케이션 전체 동작에 핵심적인 역할을 하는 모듈.
 
@@ -256,7 +256,7 @@ export class CoreTestComponent {
 ````
 
 
-####특징모듈
+### 특징모듈
 
   단위 어플리케이션(특정 기능 수행하는 여러 컴포넌트, 서비스 등의 집합)을 구성하는 모듈, 하위 분리하는 모듈.
 
@@ -305,7 +305,7 @@ export class MemberRoutingModule {}
 
 `imports:[ MemberModule, ...]`
 
-####공유 모듈
+### 공유 모듈
 
 자주 사용되는 모듈이지만, 핵심 모듈처럼 항상 사용되는 모듈이 대상이 아닌 특징 모듈을 구성할 때 자주 반복적으로 선언되는 모듈로 반복적으로 나타나는 패턴을 묶어 공유모듈로 정의.
 

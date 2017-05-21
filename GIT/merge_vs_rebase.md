@@ -2,7 +2,7 @@
 
 merge를 하면 branch를 생성한 시점의 베이스를 기준으로 합병이 된다
 
-rebase는 'git rebase 브랜치' 에서 지정한 브랜치를 베이스로 기준 삼아 합병이 된다
+rebase는 `git rebase 브랜치` 에서 지정한 브랜치를 베이스로 기준 삼아 합병이 된다
 
 ## merge
 

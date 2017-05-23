@@ -47,7 +47,9 @@ const helloRoutes: Routes = [
 const appRoutes: Routes = [
   // 라우터 설정 변수
   ...helloRoutes,
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent,
+    path: 'lazy', loadChildren: 'app/player.module#PlayerModule'
+  }
 ];
 
 export const appRoutingProviders: any[] = [
@@ -64,6 +66,8 @@ export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(appRou
 `appRoutes`에서 여러 라우터 설정 정보를 합치려면 `...` 와 같은 절개 연산자를 이용하면 됌.
 
 `AppRoutingModule`은 루트 모듈에 포함돼야 하기 때문에 `export` 처리를 함.
+
+`loadChildren` 게으르게 임포트함.
 
 - 루트 모듈
 
@@ -91,7 +95,6 @@ import { HelloComponent } from './hello/hello.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
 ````
 
 - 어플리케이션 컴포넌트(app.component.ts)
@@ -122,6 +125,77 @@ import { Component } from '@angular/core';
 export class HelloComponent { }
 ````
 
+## 특징 모듈에서 라우팅 설정
+
+위의 코드는 루트 모듈에서만 사용된다. 루트 모듈은 맨 처음 한번 시작 포인트를 갖기 때문에, lazy load와 같은 어플리케이션이 시작 시점에 초기화 되지 않는 모듈일 경우에는 오류가 발생한다. 그래서 이러한 점을 대처하기 위해 `RouterModule.forChild`를 활용한다.
+
+- **forChild()를 이용한 라우팅 설정**
+
+````typescript
+import { NgModule }            from '@angular/core';
+import { RouterModule }        from '@angular/router';
+
+import { MemberComponent }    from './member.component';
+
+@NgModule({
+  imports: [RouterModule.forChild([
+    { path: 'member', component: MemberComponent}
+  ])],
+  exports: [RouterModule]
+})
+export class MemberRoutingModule {}
+````
+
+- **라우팅 설정을 특징 모듈에 추가**
+
+````typescript
+import { NgModule }           from '@angular/core';
+import { CommonModule }       from '@angular/common';
+import { FormsModule }        from '@angular/forms';
+
+import { MemberComponent }   from './member.component';
+import { MemberRoutingModule }   from './member-routing.module';
+
+@NgModule({
+  imports:      [ CommonModule, FormsModule, MemberRoutingModule ],
+  declarations: [ MemberComponent ],
+  providers:    [ ]
+})
+export class MemberModule { }
+````
+
+## 라우팅 접근 제어
+
+라우팅 접근제어에 **가드(guard)**를 사용, 크게 4가지 종류가 있음
+
+- CanActivate 가드, CanActivateChild 가드
+
+라우터의 접근 권한을 검사, CanActivate 인터페이스 모듈을 받아 canActivate() 메서드를 구현. url을 체크하고 참이나 거짓 값중 하나를 반환함.
+
+- CanDeactive 가드
+
+라우트 변경시 호출 되는 라우트.
+
+- Resolve 가드
+
+라우트 데이터를 가져와 컴포넌트에 제공하는 가드.(주소에서 id를 가져온다든지)
+
+- CanLoad 가드
+
+lazy 모듈 임포트시 사용되는 가드.
+
+````typescript
+const lazyRoutes: Routes = [
+  {
+    path: 'lazy',
+    loadChildren: 'app/player/player.module#PlayerModule',
+    canLoad: [AuthGuard]
+  }
+];
+````
+
 ## Reference
 
 쉽고 빠르게 배우는 Angular2 프로그래밍 - 정진욱
+
+https://stackoverflow.com/questions/40498081/routermodule-forrootroutes-vs-routermodule-forchildroutes

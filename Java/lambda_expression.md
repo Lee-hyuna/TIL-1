@@ -55,7 +55,7 @@ Movable movable2 = str -> System.out.println("gogo move move" + str);
 
 ### Consumer
 
-매개 변수 있고, 리턴 값 없음 : `accept()` 메서드, void 함수를 람다식으로 선언![img](file:///C:/Users/June/AppData/Local/Temp/enhtmlclip/Image.png)
+매개 변수 있고, 리턴 값 없음 : `accept()` 메서드, void 함수를 람다식으로 선언![img](http://cfile26.uf.tistory.com/image/2418983555FE5A372A486E)
 
 ````java
 Consumer<String> consumer = t -> System.out.println(t + "8");
@@ -66,7 +66,7 @@ consumer.accept("자바");
 
 매개 변수 없고, 리턴 값만 있음.
 
-![img](file:///C:/Users/June/AppData/Local/Temp/enhtmlclip/Image(1).png)
+![img](http://cfile29.uf.tistory.com/image/2207094655FE5C7624E57D)
 
 ````java
 IntSupplier intSupplier = () -> {
@@ -81,7 +81,7 @@ int num = intSupplier.getAsInt();
 
 매개 변수, 리턴 모두 있음
 
-![img](file:///C:/Users/June/AppData/Local/Temp/enhtmlclip/Image(2).png)
+![img](http://cfile26.uf.tistory.com/image/241F824F55FF96710941E4)
 
 `Function<T, R>` : T를 R에 매핑한다는 의미
 

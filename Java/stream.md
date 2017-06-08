@@ -55,7 +55,7 @@ List transactionsIds =
 boolean expensive =
 	transactions.stream()
         .filter(t -> t.getType() == Transaction.GROCERY)
-        .findAny();
+        .findAny().isPresent();
 
 transactions.stream()
     .filter(t -> t.getType() == Transaction.GROCERY)

@@ -16,7 +16,7 @@
 
 #### 프로세스 상태
 
-![img](http://postfiles15.naver.net/20150225_142/skout90_1424814965591pKduW_PNG/%C7%C1%B7%CE%BC%BC%BD%BA%BB%F3%C5%C2.png?type=w3)
+![img](http://www.pling.org.uk/cs/opsimg/processstates.png)
 
 대기 - (조건 만족) - 준비 - (대기열) - 실행(CPU 소유) - 대기 OR 준비로 `문맥교환`
 
@@ -26,7 +26,7 @@
 
 *다중프로그래밍이란? CPU 작업과 입출력 작업을 병행하는 것*
 
-![img](http://postfiles16.naver.net/20150225_255/skout90_1424815802196vuV8s_PNG/%C7%C1%B7%CE%BC%BC%BD%BA_%C0%DA%BF%F8%C2%F7%C1%F6.PNG?type=w3)
+![img](http://i.imgur.com/zh4JjZv.png)
 
 #### 문맥 교환은 언제 발생하나?
 

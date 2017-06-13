@@ -10,9 +10,21 @@
 
 #### []기호의 의미
 
-**클래스로 해당 데이터를 전달**함. 클래스에서는 @Input()을 통해 해당 값을 받음.
+**custom property** 로 클래스와 연결시킬 수 있음.
 
-@Input() childname: string;
+````typescript
+@Component({
+  selector: 'app-root',
+  template: `
+    <div class="app">
+      <counter [init]="initialCount"></counter>
+    </div>
+  `
+})
+export class AppComponent {
+  initialCount: number = 10;
+}
+````
 
 
 
@@ -30,3 +42,9 @@
 
    @Output()장식자로 선언한 변수와 동일한 속성명.
 
+
+
+
+## Reference
+
+https://toddmotto.com/passing-data-angular-2-components-input

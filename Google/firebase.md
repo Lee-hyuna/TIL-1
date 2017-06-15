@@ -1,8 +1,6 @@
 # Firebase
 
-웹과 모바일 개발에 필요한 기능을 제공하는 BaaS(BackEnd as  a Service)로, 프론트 엔드개발에 더축 집중할 수 있음.
-
-
+웹과 모바일 개발에 필요한 기능을 제공하는 BaaS(BackEnd as  a Service)로, 프론트 엔드개발에 더축 집중할 수 있음. 이번 시간에 DB 접근, 인증, CRUD작업에 대해 포스팅한다.
 
 ## 시작하기
 
@@ -82,10 +80,9 @@ CLI를 통해 자동으로 index.html및 기본 파일들이 설정되는데, �
 ```html
 <html>
 <head>
-   .... 이곳에 웹용 파이어베이스 코드를 추가해준다
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
   <script>
-    // Initialize Firebase
+    // .... 이곳에 웹용 파이어베이스 코드를 추가해준다.(firebase 홈)
     var config = {
       ...
     };
@@ -120,6 +117,88 @@ CLI를 통해 자동으로 index.html및 기본 파일들이 설정되는데, �
 > \> firebase serve
 
 위 키워드를 입력하고 http://localhost:5000 을 접속하여 페이지가 나오는 것을 확인한다.
+
+## 권한 인증
+
+- index.html
+
+````javascript
+var auth = firebase.auth();
+var userInfo;
+var authProvider = new firebase.auth.GoogleAuthProvider();
+// 팝업 형태로 열어줌
+// 성공 실패 구분
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    // 인증 성공시
+    userInfo = user;
+    getKanbanlist(); // 아래 함수 구현
+  } else {
+    // 인증 실패시, 인증 팝업창을 뛰워줌
+    auth.signInWithPopup(authProvider);
+  }
+});
+````
+
+## DB
+
+- index.html
+
+````javascript
+var database = firebase.database();
+
+function getKanbanlist() {
+  // Firebase console DB에서 만든 데이터 경로대로 데이터를 받아옴.
+  var kanbanRef = database.ref('kanbans/' + userInfo.uid);
+
+  // Firebase는 비동기 방식, FB DB에 추가되면 즉시 콜백으로 데이터를 받아온다.
+  kanbanRef.on('child_added', onChildAdded);
+  kanbanRef.on('child_changed', function (data) {
+    var key = data.key;
+    var txt = data.val().txt;
+    // 해당 데이터로 html에 데이터를 수정.
+  });
+}
+
+// Insert
+function onChildAdded(data) {
+  var key = data.key;
+  var kanbanData = data.val();
+  var txt = kanbanData.txt;
+  // 해당 데이터를 html 요소에 추가.
+}
+
+// 데이터 단일 건 가져오기
+function getKanban(key) {
+  var kanbanRef = database.ref("kanbans/" + userInfo.uid + "/" + key)
+  .once('value').then(function (snapshot) {
+    if (snapshot.val() != null) {
+      // 가져온 데이터를 저장
+      $(".textarea").val(snapshot.val().txt);
+    }
+  });
+}
+
+// 삭제하기
+function deleteKanban(key) {
+  kanbanRef = database.ref("kanbans/" + userInfo.uid + "/" + key);
+  kanbanRef.remove();
+}
+````
+
+#### on
+
+`on('child_added', 메서드);` `on('child_changed', 메서드);` 함수를 통해 DB에 데이터가 수정, 추가시에 콜백 함수가 실행된다. 리얼타임 DB의 위력을 볼 수 있다.
+
+
+
+## Firebase 서버 배포
+
+> \> firebase deploy
+
+서버에 바로 작업 내역이 반영된다.
+
+
 
 ## Reference
 

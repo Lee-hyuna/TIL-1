@@ -131,7 +131,7 @@ root 폴더에 `tsconfig.json`을 생성한다
 
 *컴파일 하려면....*
 
-> \> tsd ./src/index.ts
+> \> tsc ./src/index.ts
 
 위 명령어를 치면 ts가 js로 컴파일 되지만, index.html을 실행하면, **오류가 발생한다.** `export` 명령어는 webpack 모듈러를 사용하고 `commonjs`를 사용할 때만 사용할 수 있다.
 
@@ -205,6 +205,10 @@ Loader의 설정은 `rules` 프로퍼티를 통해 이루어지는데, rules 프
 > \> npm install --save-dev css-loader awesome-typescript-loader 
 >
 > \> npm install --save-dev tslint tslint-loader
+
+*참고 : tslint 기본 설정 파일 생성*
+
+> \> ./node_modules/.bin/tslint --init 
 
 
 **Resolve**

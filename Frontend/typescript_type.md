@@ -24,6 +24,11 @@ console.log(obj[sym]); // value
 
 - Array : Array<타입>, 타입[]
 
+````typescript
+const array:number[] = [1, 2, 3, 4, 5];
+const array2:Array<number> = [1, 2, 3, 4, 5];
+````
+
 ### 추가 타입
 
 - Any : 최대한 쓰지 않는 것이 TypeScript를 잘쓰는 길이라는 의견이 있음.
@@ -44,8 +49,6 @@ console.log(Color[c]); // Green
 const tu : [number, string] = [0, "일"];
 ````
 
-
-
 ## Template String
 
 행에 걸쳐있거나, 표현식을 넣을 수 있는 문자열.
@@ -53,6 +56,29 @@ const tu : [number, string] = [0, "일"];
 ## Union Type
 
 string | null | defined 식으로 사용.
+
+## Type Assertions
+
+실제로 해당 타입으로 바꾸는 것이 아니라, 컴파일러에게 타입 체크를 할 시에만 타입스크립트 컴파일러에게 알려주는 것.
+
+```typescript
+let strLength: number = (<string>someValue).length;
+let strLength: number = (someValue as string).length;
+```
+
+## Type Allias
+
+타입 이름의 별칭을 지정
+
+```typescript
+type MyType = string | number;
+let myStr: MyType = 'hello';
+let myNum: MyType = 1;
+
+// tuple
+type MyTuple = [string, number];
+let another: MyTuple = ['Anna', 1];
+```
 
 
 

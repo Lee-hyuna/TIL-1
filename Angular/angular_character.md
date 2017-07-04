@@ -30,13 +30,27 @@ export class AppComponent {
 
 #### ()기호의 의미
 
-<button (click)="updateParent(active)">부모에게 이벤트보내기</button>
+1. (click) 이벤트로 쓰임
 
-1. (click) 이벤트로 쓰이는듯.
 
-2. (mouseover) 이벤트
+````typescript
+import { Component } from '@angular/core';
 
-3. `@Output() outputProperty = new EventEmitter<boolean>();`
+@Component({
+  templateUrl: '<button ion-button (click)="onClick()>버튼</button>'
+})
+export class TabsPage {
+  constructor() {
+  }
+  onClick() {
+    alert('dd');
+  }
+}
+````
+
+1. (mouseover) 이벤트
+
+2. `@Output() outputProperty = new EventEmitter<boolean>();`
 
    `<child (outputProperty)="outputEvent($event)"></child>`
 

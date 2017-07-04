@@ -82,7 +82,7 @@ import { MyComponent } from './my.component';
 })
 ````
 
-> imports 속성
+1. imports 속성
 
 - **브라우저 모듈(Browser Module)**
 
@@ -126,19 +126,23 @@ export class AppRoutingModule {}
 
 forRoot를 이용해 라우트를 등록, `app.module.ts` 파일 `imports`에 추가
 
-> providers 속성
+2. providers 속성
 
 전역에서 사용할 서비스 등록
 
 > ex) 개발단계에서 전역적으로 사용되는 로거 서비스
 
-> declarations 속성
+3. declarations 속성
 
 어플리케이션 레벨에서 사용하고자 하는 컴포넌트, 지시자 파이프
 
-> bootstrap 속성
+4. bootstrap 속성
 
 최상위 컴포넌트인 애플리케이션 컴포넌트 등록
+
+5. entryComponents
+
+페이지 컴포넌트를 등록
 
 ### 핵심 모듈
 

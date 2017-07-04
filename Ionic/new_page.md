@@ -1,4 +1,4 @@
-# 메뉴 만들기
+# 페이지 만들기
 
 Ionic 2, Anuglar 2 기준에서 새 페이지를 만드는 법
 
@@ -106,7 +106,22 @@ export class MyApp {
 }
 ````
 
+>  방법2 NavControll 이용
 
+````typescript
+...
+import { NavController } from 'ionic-angular';
+...
+   constructor(public navCtrl: NavController) {
+   }
+  openPage(page) {
+    this.navCtrl.push(page);
+  }
+````
+
+NavController.push(PageName) : 페이지 이동
+
+NavController.pop() : 이전 페이지로 돌아감
 
 ## 메뉴 버튼 만들기
 

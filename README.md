@@ -1,3 +1,7 @@
+### 2017.7.12 일자로 공부내용을 아래 블로그에 업데이트 합니다.
+https://skout90.github.io
+
+
 # Today I Learned
 
 Junho Nam이 오늘 새로 배운 것을 다음의 규칙으로 commit 합니다. [milooy TIL 참고](https://github.com/milooy/til)
